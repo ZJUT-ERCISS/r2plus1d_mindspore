@@ -1,0 +1,126 @@
+# model architecture
+model_name: "r(2+1)d_18"   # 模型名
+
+#global config
+device_target: "GPU"
+dataset_sink_mode: False
+context:      # 训练环境
+    mode: 0 #0--Graph Mode; 1--Pynative Mode
+    device_target: "GPU"
+    save_graphs: False
+    device_id: 1
+
+# model settings of every parts
+model:
+    type: R2Plus1d18
+    stage_channels: [64, 128, 256, 512]
+    stage_strides: [[1, 1, 1],
+                    [2, 2, 2],
+                    [2, 2, 2],
+                    [2, 2, 2]]
+    num_classes: 400
+
+# learning rate for training process
+learning_rate:     # learning_rate规划，对应方法在mindvision/engine/lr_schedule中
+    lr_scheduler: "cosine_annealing"
+    lr: 0.012
+    steps_per_epoch: 29850
+    lr_gamma: 0.1
+    eta_min: 0.0
+    t_max: 100
+    max_epoch: 100
+    warmup_epochs: 4
+
+# optimizer for training process
+optimizer:      # optimizer参数
+    type: 'Momentum'
+    momentum: 0.9
+    weight_decay: 0.0004
+    loss_scale: 1.0
+
+loss:       # loss 模块
+    type: SoftmaxCrossEntropyWithLogits
+    sparse: True
+    reduction: "mean"
+
+train:       # 预训练相关
+    pre_trained: False
+    pretrained_model: ""
+    ckpt_path: "./output/"
+    epochs: 100
+    save_checkpoint_epochs: 5
+    save_checkpoint_steps: 1875
+    keep_checkpoint_max: 10
+    run_distribute: False
+
+eval:
+    pretrained_model: ".vscode/ms_ckpts/r2plus1d_kinetic400_20220919.ckpt"
+
+infer:       # 推理相关
+    pretrained_model: ".vscode/ms_ckpts/r2plus1d_kinetic400_20220919.ckpt"
+    batch_size: 1
+    image_path: ""
+    normalize: True
+    output_dir: "./infer_output"
+ 
+export:       # 模型导出为其他格式
+    pretrained_model: ""
+    batch_size: 256
+    image_height: 224
+    image_width: 224
+    input_channel: 3
+    file_name: "r2plus1d18"
+    file_formate: "MINDIR"
+
+data_loader:
+    train:          # 验证、推理相关，参数与train基本一致
+        dataset:
+            type: Kinetic400
+            path: "/home/publicfile/kinetics-400"
+            split: 'train'
+            batch_size: 8
+            seq: 16
+            seq_mode: "discrete"
+            num_parallel_workers: 1
+            shuffle: True
+        map: 
+            operations:
+                - type: VideoRescale
+                  shift: 0.0
+                - type: VideoResize
+                  size: [128, 171]
+                - type: VideoRandomCrop
+                  size: [112, 112]
+                - type: VideoRandomHorizontalFlip
+                  prob: 0.5
+                - type: VideoReOrder
+                  order: [3,0,1,2]
+                - type: VideoNormalize
+                  mean: [0.43216, 0.394666, 0.37645]
+                  std: [0.22803, 0.22145, 0.216989]
+            input_columns: ["video"]
+    eval:          # 验证、推理相关，参数与train基本一致
+        dataset:
+            type: Kinetic400
+            path: "/home/publicfile/kinetics-400"
+            split: 'val'
+            batch_size: 1
+            seq: 64
+            seq_mode: "discrete"
+            num_parallel_workers: 1
+            shuffle: False
+        map: 
+            operations:
+                - type: VideoRescale
+                  shift: 0.0
+                - type: VideoResize
+                  size: [128, 171]
+                - type: VideoCenterCrop
+                  size: [112, 112]
+                - type: VideoReOrder
+                  order: [3,0,1,2]
+                - type: VideoNormalize
+                  mean: [0.43216, 0.394666, 0.37645]
+                  std: [0.22803, 0.22145, 0.216989]
+            input_columns: ["video"]
+    group_size: 1
