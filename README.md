@@ -26,7 +26,7 @@ The code of this warehouse is the implementation of R(2+1)D network based on the
 <div align=center>
 <img src=./src/pic/r2plus1d.png> 
 
-3D vs (2+1)D convolution</div>
+Figure1 3D vs (2+1)D convolution</div>
 
 The figure above shows the difference between 3D convolution and (2+1)D convolution.
 
@@ -110,7 +110,7 @@ pip install -r requirements.txt
 R(2+1)D model uses kinetics400 dataset to train and validate in this repository.
 
 ### [Model Checkpoints](#contents)
-The pretrain model is trained on the the kinetics400 dataset. It can be downloaded here: [r2plus1d18_kinetic400.ckpt]([https://zjuteducn-my.sharepoint.com/:u:/g/personal/201906010313_zjut_edu_cn/EXT6cCmxV59Gp4U9VChcmuUB2Fmuhfg7SRkfuxGsOiyBUA?e=qJ9Wc1](https://zjuteducn-my.sharepoint.com/:u:/g/personal/201906010313_zjut_edu_cn/EXT6cCmxV59Gp4U9VChcmuUB2Fmuhfg7SRkfuxGsOiyBUA?e=qJ9Wc1))
+The pretrain model is trained on the the kinetics400 dataset. It can be downloaded here: [r2plus1d18_kinetic400.ckpt](https://zjuteducn-my.sharepoint.com/:u:/g/personal/201906010313_zjut_edu_cn/EXT6cCmxV59Gp4U9VChcmuUB2Fmuhfg7SRkfuxGsOiyBUA?e=qJ9Wc1)
 
 ### [Running](#contents)
 To train or finetune the model, you can run the following script:
