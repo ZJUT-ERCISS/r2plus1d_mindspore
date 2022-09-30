@@ -114,7 +114,26 @@ R(2+1)D model uses kinetics400 dataset to train and validate in this repository.
 The pretrain model is trained on the the kinetics400 dataset. It can be downloaded here: [r2plus1d18_kinetic400.ckpt]([https://zjuteducn-my.sharepoint.com/:u:/g/personal/201906010313_zjut_edu_cn/EXT6cCmxV59Gp4U9VChcmuUB2Fmuhfg7SRkfuxGsOiyBUA?e=qJ9Wc1](https://zjuteducn-my.sharepoint.com/:u:/g/personal/201906010313_zjut_edu_cn/EXT6cCmxV59Gp4U9VChcmuUB2Fmuhfg7SRkfuxGsOiyBUA?e=qJ9Wc1))
 
 ## [Running](#contents)
-TODO
+To train or finetune the model, you can run the following script:
+
+```shell
+
+cd scripts/
+
+# run training example
+bash train_standalone.sh [PROJECT_PATH] [DATA_PATH]
+
+# run distributed training example
+bash train_distribute.sh [PROJECT_PATH] [DATA_PATH]
+```
+
+To validate the model, you can run the following script:
+```shell
+cd scripts/
+
+# run evaluation example
+bash eval_standalone.sh [PROJECT_PATH] [DATA_PATH]
+```
 
 # [Script Description](#contents)
 
