@@ -107,7 +107,7 @@ pip install -r requirements.txt
 ```
 
 ### [Dataset Preparation](#contents)
-R(2+1)D model uses kinetics400 dataset to train and validate in this repository.
+R(2+1)D model uses [Kinetics400](https://www.deepmind.com/open-source/kinetics) dataset to train and validate in this repository.
 
 ### [Model Checkpoints](#contents)
 The pretrain model is trained on the the kinetics400 dataset. It can be downloaded here: [r2plus1d18_kinetic400.ckpt](https://zjuteducn-my.sharepoint.com/:u:/g/personal/201906010313_zjut_edu_cn/EXT6cCmxV59Gp4U9VChcmuUB2Fmuhfg7SRkfuxGsOiyBUA?e=qJ9Wc1)
