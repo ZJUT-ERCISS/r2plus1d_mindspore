@@ -1,28 +1,27 @@
-# r2puls1d_mindspore
+# Contents
+- [Contents](#contents)
+  - [Description](#description)
+  - [Model Architecture](#model-architecture)
+  - [Dataset](#dataset)
+  - [Environment Requirements](#environment-requirements)
+  - [Quick Start](#quick-start)
+    - [Requirements Installation](#requirements-installation)
+    - [Dataset Preparation](#dataset-preparation)
+    - [Model Checkpoints](#model-checkpoints)
+    - [Running](#running)
+  - [Script Description](#script-description)
+    - [Script and Sample Code](#script-and-sample-code)
+    - [Script Parameters](#script-parameters)
+  - [Training Process](#training-process)
+  - [Evaluation Process](#evaluation-process)
+  - [Citation](#citation)
 
-- [r2puls1d_mindspore](#r2puls1d_mindspore)
-- [Description](#description)
-- [Model Architecture](#model-architecture)
-- [Dataset](#dataset)
-- [Environment Requirements](#environment-requirements)
-- [Quick Start](#quick-start)
-  - [Requirements Installation](#requirements-installation)
-  - [Dataset Preparation](#dataset-preparation)
-  - [Model Checkpoints](#model-checkpoints)
-  - [Running](#running)
-- [Script Description](#script-description)
-  - [Script and Sample Code](#script-and-sample-code)
-  - [Script Parameters](#script-parameters)
-- [Training Process](#training-process)
-- [Evaluation Process](#evaluation-process)
-- [Citation](#citation)
-
-# [Description](#contents)
+## [Description](#contents)
   
 
 The code of this warehouse is the implementation of R(2+1)D network based on the mindspore framework. If you want to read the original paper, you can click the link below: [A Closer Look at Spatiotemporal Convolutions for Action Recognition](https://arxiv.org/abs/1711.11248)
 
-# [Model Architecture](#contents)
+## [Model Architecture](#contents)
 
 <div align=center>
 <img src=./src/pic/r2plus1d.png> 
@@ -44,7 +43,7 @@ Table 1 shows the R3D network of layer 18 and layer 34. From R3D models the auth
  
   
 
-# [Dataset](#contents)
+## [Dataset](#contents)
 
 Dataset used: [Kinetics400](https://www.deepmind.com/open-source/kinetics)
 
@@ -82,7 +81,7 @@ The directory structure of Kinetic-400 dataset looks like:
   
   
 
-# [Environment Requirements](#contents)
+## [Environment Requirements](#contents)
 
 To run the python scripts in the repository, you need to prepare the environment as follow:
 
@@ -99,21 +98,21 @@ To run the python scripts in the repository, you need to prepare the environment
     - [MindSpore Python API](https://www.mindspore.cn/docs/en/master/index.html)
 
   
-# [Quick Start](#contents)
+## [Quick Start](#contents)
 
-## [Requirements Installation](#contents)
+### [Requirements Installation](#contents)
 Use the following commands to install dependencies:
 ```shell
 pip install -r requirements.txt
 ```
 
-## [Dataset Preparation](#contents)
+### [Dataset Preparation](#contents)
 R(2+1)D model uses kinetics400 dataset to train and validate in this repository.
 
-## [Model Checkpoints](#contents)
+### [Model Checkpoints](#contents)
 The pretrain model is trained on the the kinetics400 dataset. It can be downloaded here: [r2plus1d18_kinetic400.ckpt]([https://zjuteducn-my.sharepoint.com/:u:/g/personal/201906010313_zjut_edu_cn/EXT6cCmxV59Gp4U9VChcmuUB2Fmuhfg7SRkfuxGsOiyBUA?e=qJ9Wc1](https://zjuteducn-my.sharepoint.com/:u:/g/personal/201906010313_zjut_edu_cn/EXT6cCmxV59Gp4U9VChcmuUB2Fmuhfg7SRkfuxGsOiyBUA?e=qJ9Wc1))
 
-## [Running](#contents)
+### [Running](#contents)
 To train or finetune the model, you can run the following script:
 
 ```shell
@@ -135,9 +134,9 @@ cd scripts/
 bash eval_standalone.sh [PROJECT_PATH] [DATA_PATH]
 ```
 
-# [Script Description](#contents)
+## [Script Description](#contents)
 
-## [Script and Sample Code](#contents)
+### [Script and Sample Code](#contents)
 ```text
 .
 │  infer.py                                     // infer script
@@ -208,7 +207,7 @@ bash eval_standalone.sh [PROJECT_PATH] [DATA_PATH]
 
 ```
 
-## [Script Parameters](#contents)
+### [Script Parameters](#contents)
 Parameters for both training and evaluation can be set in r2plus1d18.yaml
 - config for R(2+1)D, Kinetics400 dataset
 
@@ -340,27 +339,64 @@ data_loader:
             input_columns: ["video"]
     group_size: 1
 ```  
-# [Training Process](#contents)
-TODO
-# [Evaluation Process](#contents)
-TODO
+## [Training Process](#contents)
 
+Run `scripts/train_standalone.sh` to train the model standalone. The usage of the script is:
 
-# [Citation](#contents)
+```text
+bash train_standalone.sh [PROJECT_PATH] [DATA_PATH]
+```
+
+You can view the results through the file `train_standalone.log`.
+
+```text
+epoch: 1 step: 1, loss is 5.963528633117676
+epoch: 1 step: 2, loss is 6.055394649505615
+epoch: 1 step: 3, loss is 6.021022319793701
+epoch: 1 step: 4, loss is 5.990570068359375
+epoch: 1 step: 5, loss is 6.023948669433594
+epoch: 1 step: 6, loss is 6.1471266746521
+epoch: 1 step: 7, loss is 5.941061973571777
+epoch: 1 step: 8, loss is 5.923609733581543
+...
+```
+
+## [Evaluation Process](#contents)
+
+The evaluation dataset was [Kinetics400](https://www.deepmind.com/open-source/kinetics)
+
+Run `scripts/eval_standalone.sh` to evaluate the model. The usage of the script is:
+
+```text
+bash scripts/eval_standalone.sh [PROJECT_PATH] [DATA_PATH] [MODEL_PATH]
+```
+
+The eval results can be viewed in `eval_result.log`.
+
+```text
+step:[    1/ 1242], metrics:[], loss:[1.766/1.766], time:5113.836 ms, 
+step:[    2/ 1242], metrics:['Loss: 1.7662', 'Top_1_Accuracy: 0.6250', 'Top_5_Accuracy: 0.8750'], loss:[2.445/2.106], time:168.124 ms, 
+step:[    3/ 1242], metrics:['Loss: 2.1056', 'Top_1_Accuracy: 0.5312', 'Top_5_Accuracy: 0.9062'], loss:[1.145/1.785], time:172.508 ms, 
+step:[    4/ 1242], metrics:['Loss: 1.7852', 'Top_1_Accuracy: 0.5833', 'Top_5_Accuracy: 0.9167'], loss:[2.595/1.988], time:169.809 ms, 
+step:[    5/ 1242], metrics:['Loss: 1.9876', 'Top_1_Accuracy: 0.5312', 'Top_5_Accuracy: 0.8906'], loss:[4.180/2.426], time:211.982 ms, 
+step:[    6/ 1242], metrics:['Loss: 2.4261', 'Top_1_Accuracy: 0.5000', 'Top_5_Accuracy: 0.8250'], loss:[2.618/2.458], time:171.277 ms, 
+step:[    7/ 1242], metrics:['Loss: 2.4580', 'Top_1_Accuracy: 0.4792', 'Top_5_Accuracy: 0.8021'], loss:[4.381/2.733], time:174.786 ms, 
+...
+```
+
+## [Citation](#contents)
 
 
 If you find this project useful in your research, please consider citing:
 
 ```BibTeX
-@misc{r2plus1d_mindspore,
+@article{r2plus1d2018,
   title={A closer look at spatiotemporal convolutions for action recognition},
   author={Tran, Du and Wang, Heng and Torresani, Lorenzo and Ray, Jamie and LeCun, 
           Yann and Paluri, Manohar},
+  year={2018},
+  journal = {CVPR},
   doi={10.1109/cvpr.2018.00675},
-  year={2018}
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/ZJUT-ERCISS/r2plus1d_mindspore}}
 }
 ```
 
