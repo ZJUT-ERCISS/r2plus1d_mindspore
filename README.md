@@ -14,6 +14,7 @@
     - [Script Parameters](#script-parameters)
   - [Training Process](#training-process)
   - [Evaluation Process](#evaluation-process)
+  - [Performance](#)
   - [Citation](#citation)
 
 ## [Description](#contents)
@@ -383,7 +384,24 @@ step:[    6/ 1242], metrics:['Loss: 2.4261', 'Top_1_Accuracy: 0.5000', 'Top_5_Ac
 step:[    7/ 1242], metrics:['Loss: 2.4580', 'Top_1_Accuracy: 0.4792', 'Top_5_Accuracy: 0.8021'], loss:[4.381/2.733], time:174.786 ms, 
 ...
 ```
+## [Performance](#contents)
 
+#### Evaluation Performance
+
+- r(2+1)d for kinetic400
+
+| Parameters          | GPU                                                       |
+| -------------       |--------------------------------------  |
+| Model Version       | r                                                       |
+| Resource            | Nvidia 3090Ti                                             |
+| uploaded Date       | 09/06/2022 (month/day/year)                               |
+| MindSpore Version   | 1.6.1                                                     |
+| Dataset             | kinetic400                                                    |
+| Training Parameters | epoch = 30,  batch_size = 64                               |
+| Optimizer           | SGD                                                       |
+| Loss Function       | Max_SoftmaxCrossEntropyWithLogits                         |
+| Top_1               | 1pc:53.8%                                                 |
+| Top_5               | 1pc:75.9%                                                 |
 ## [Citation](#contents)
 
 
