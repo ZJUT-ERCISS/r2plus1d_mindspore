@@ -36,7 +36,7 @@ def r2plus1d_kinetics400_eval(args_opt):
     dataset_eval = Kinetic400(args_opt.data_url,
                               split="val",
                               seq=args_opt.seq,
-                              seq_mode="discrete",
+                              seq_mode="average",
                               num_parallel_workers=args_opt.num_parallel_workers,
                               shuffle=False,
                               batch_size=args_opt.batch_size,

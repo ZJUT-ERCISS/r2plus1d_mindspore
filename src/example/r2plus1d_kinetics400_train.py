@@ -83,11 +83,9 @@ def r2plus1d_kinetics400_train(args_opt):
 
     # Create model.
     if args_opt.model_name == "r2plus1d18":
-        network = R2Plus1d18(num_classes=args_opt.num_classes,
-                             pretrained=args_opt.pretrained)
+        network = R2Plus1d18(num_classes=args_opt.num_classes)
     elif args_opt.model_name == "r2plus1d50":
-        network = R2Plus1d50(num_classes=args_opt.num_classes,
-                             pretrained=args_opt.pretrained)
+        network = R2Plus1d50(num_classes=args_opt.num_classes)
 
     if args_opt.pretrained:
         param_dict = load_checkpoint(args_opt.pretrained_path)
