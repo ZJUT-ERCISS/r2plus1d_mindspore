@@ -14,7 +14,10 @@
     - [Script Parameters](#script-parameters)
   - [Training Process](#training-process)
   - [Evaluation Process](#evaluation-process)
-  - [Performance](#)
+  - [Performance](#performance)
+      - [Evaluation Performance](#evaluation-performance)
+  - [Benchmark](#benchmark)
+  - [Visualization](#visualization)
   - [Citation](#citation)
 
 ## [Description](#contents)
@@ -400,8 +403,42 @@ step:[    7/ 1242], metrics:['Loss: 2.4580', 'Top_1_Accuracy: 0.4792', 'Top_5_Ac
 | Training Parameters | epoch = 30,  batch_size = 64                               |
 | Optimizer           | SGD                                                       |
 | Loss Function       | Max_SoftmaxCrossEntropyWithLogits                         |
-| Top_1               | 1pc:53.8%                                                 |
-| Top_5               | 1pc:75.9%                                                 |
+| Top_1               | 1pc:57.3%                                                 |
+| Top_5               | 1pc:79.6%                                                 |
+
+## [Benchmark](#contents)
+
+The original paper did not provide the performance of r2plus1d18 on the k400 dataset, but it can be found on the official website of pytorch.
+
+<table>
+	<tr>
+	    <td>Model</td>
+        <td>Dataset</td>
+        <td colspan="2">Original Target</td>
+        <td>Mindspore</td>
+	</tr >
+    <tr>
+	    <td rowspan="2">R(2+1)D</td>
+	    <td rowspan="2">Kinetics400</td>
+        <td>Top1</td>
+        <td>57.5%</td>
+        <td>57.3%</td>
+    </tr>
+    <tr>
+        <td>Top5</td>
+        <td>78.8%</td>
+        <td>79.6%</td>
+    </tr>
+</table>
+
+## [Visualization](#contents)
+
+The following graphics show the visualization results of model inference.
+<div align=center>
+<img src=./src/pic/result0.gif> 
+<img src=./src/pic/result1.gif> 
+</div>
+
 ## [Citation](#contents)
 
 
